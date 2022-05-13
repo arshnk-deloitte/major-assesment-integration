@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "af8e37fc-36e6-4876-9987-06bb1310e2b4",
+		"name": "API-Collection-Mohammed-Arshad",
+		"description": "This collection is for Major Assesment API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "milestone3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validating if Id 40 in response has userId=4\", ()=>{\r",
+							"    pm.expect(pm.response.json().filter(item => item.id == 40)[0].userId).to.equal(4)\r",
+							"})\r",
+							"pm.test(\"Validating if every field named title is type string\",()=>{\r",
+							"    pm.response.json().forEach(item => pm.expect(item.title).to.be.an(\"string\"))\r",
+							"})\r",
+							"pm.test(\"validating status code\",()=>{\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"validating content type\",()=>{\r",
+							"    pm.response.to.be.header('Content-Type','application/json; charset=utf-8')\r",
+							"})\r",
+							"pm.test(\"validating wheather response time is less than 1000ms\",()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.lessThan(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{jsonPlaceHolder}}/posts",
+				"description": "This is the get Request for milestone3 in part B - API Testing.\n\nBase URL is saved in environment variable with \"jsonPlaceHolder\" name\n\nAdded 2 test cases for testing Element with ID 40 has userId=4 and Every title field is of type String\n\ncommon test cases:\n\nhttp status code 200\n\nrequest time out < 1000ms\n\ncontent type"
+			},
+			"response": []
+		},
+		{
+			"name": "milestone4",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"email\",\"moarshad@deoitte.com\")\r",
+							"pm.environment.set(\"first_name\",\"Mohammed Arshad\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validating env variable email matches with the response\",()=>{\r",
+							"    pm.expect(pm.response.json().email).to.equal(pm.environment.get(\"email\"))\r",
+							"})\r",
+							"pm.test(\"Validating env variable first_name matches with the response\",()=>{\r",
+							"    pm.expect(pm.response.json().first_name).to.equal(pm.environment.get(\"first_name\"))\r",
+							"})\r",
+							"pm.test(\"validating status code\",()=>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"pm.test(\"validating content type\",()=>{\r",
+							"    pm.response.to.be.header('Content-Type','application/json; charset=utf-8')\r",
+							"})\r",
+							"pm.test(\"validating wheather response time is less than 1000ms\",()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.lessThan(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"email\": \"{{email}}\",\r\n            \"first_name\": \"{{first_name}}\",\r\n            \"last_name\": \"K\",\r\n            \"avatar\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{reqRes}}/users",
+				"description": "This is the get Request for milestone4 in part B - API Testing.\n\nBase URL is saved in environment variable with \"resReq\" name\n\npre Script: setting env variables for email and first_name\n\nAdded 2 test cases for validating email and first_name\n\ncommon test cases:\n\nhttp status code 200\n\nrequest time out < 1000ms\n\ncontent type"
+			},
+			"response": []
+		},
+		{
+			"name": "milestone5",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"first_name is updated correctly\", function() {\r",
+							"    pm.expect(pm.response.json().first_name).to.equal(JSON.parse(pm.request.body.raw).first_name)\r",
+							"    pm.environment.set('first_name', pm.response.json().first_name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"last_name is updated correctly\", function() {\r",
+							"    pm.expect(pm.response.json().last_name).to.equal(JSON.parse(pm.request.body.raw).last_name)\r",
+							"    pm.environment.set('last_name', pm.response.json().last_name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"email is updated correctly\", function() {\r",
+							"    pm.expect(pm.response.json().email).to.equal(JSON.parse(pm.request.body.raw).email)\r",
+							"    pm.environment.set('last_name', pm.response.json().email)\r",
+							"})\r",
+							"pm.test(\"Checking weather the field updatedAt is present in response\",()=>{\r",
+							"    pm.response.to.have.jsonBody(\"createdAt\")\r",
+							"})\r",
+							"pm.test(\"validating status code\",()=>{\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"validating content type\",()=>{\r",
+							"    pm.response.to.be.header('Content-Type','application/json; charset=utf-8')\r",
+							"})\r",
+							"pm.test(\"validating wheather response time is less than 1000ms\",()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.lessThan(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"amith.kumar@reqres.in\",\r\n    \"first_name\": \"Amith\",\r\n    \"last_name\": \"Kumar\",\r\n    \"avatar\": \"\",\r\n    \"id\": \"664\",\r\n    \"createdAt\": \"2022-02-15T15:18:16.933Z\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{reqRes}}/users/",
+				"description": "This is the get Request for milestone5 in part B - API Testing.\n\nBase URL is saved in environment variable with \"jsonPlaceHolder\" name\n\nAdded test cases for validating email , firstname and lastname and updated them and also checking the createdAt fields presence\n\n\\[if gte mso 9\\]>\n\nNormal  \n0\n\nfalse  \nfalse  \nfalse\n\nEN-US  \nX-NONE  \nX-NONE\n\n\\[if gte mso 9\\]>\n\n\\[if gte mso 1StartFraEndFrag\n\ncommon test cases:\n\nhttp status code 200\n\nrequest time out < 1000ms\n\ncontent type"
+			},
+			"response": []
+		}
+	]
+}

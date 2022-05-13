@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "71734364-b9cd-4766-86f1-e91072aae1c1",
+		"name": "Integration-Workspace-Mohammed-Arshad",
+		"description": "Major Assessment - Integration and Api testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "milestone1-arshad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{basePathMajorAssesment}}/milestone1",
+				"description": "This is the get Request for milestone1"
+			},
+			"response": []
+		},
+		{
+			"name": "milestone2-arshad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"post_id\": 2003\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{basePathMajorAssesment}}/milestone2",
+				"description": "This is the post request for milestone2"
+			},
+			"response": []
+		},
+		{
+			"name": "milestone3-arshad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{basePathMajorAssesment}}/milestone3",
+				"description": "TStartFragment\n\nhis is the post request for milestone3\n\nEndFragment"
+			},
+			"response": []
+		}
+	]
+}
